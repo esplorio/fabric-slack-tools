@@ -93,9 +93,10 @@ def announce_deploy(project, channel=None, username=None, web_hook_url=None):
             return_value = func(*args, **kwargs)
             # ... and upon finish
             if env.host:
-                end_message = "%s deployment ended by %s on %s. Took: %s" % (project, deployment_handler, env.host, str(datetime.datetime.utcnow() - deploy_start))
+                time_taken = int(round((datetime.datetime.utcnow() - deploy_start).total_seconds())
+                end_message = "%s deployment ended by %s on %s. Took: %s" % (project, deployment_handler, env.host, time_taken)
             else:
-                end_message = "%s deployment ended by %s. Took: %s" % (project, deployment_handler, str(datetime.datetime.utcnow() - deploy_start))
+                end_message = "%s deployment ended by %s. Took: %s" % (project, deployment_handler, time_taken)
             send_slack_message(end_message, channel=channel, username=username)
             return return_value
         return inner_decorator
