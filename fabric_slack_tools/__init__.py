@@ -93,7 +93,7 @@ def announce_deploy(project, channel=None, username=None, web_hook_url=None):
             return_value = func(*args, **kwargs)
             # ... and upon finish
             if env.host:
-                time_taken = int(round((datetime.datetime.utcnow() - deploy_start).total_seconds())
+                time_taken = int(round((datetime.datetime.utcnow() - deploy_start).total_seconds()))
                 end_message = "%s deployment ended by %s on %s. Took: %s" % (project, deployment_handler, env.host, time_taken)
             else:
                 end_message = "%s deployment ended by %s. Took: %s" % (project, deployment_handler, time_taken)
